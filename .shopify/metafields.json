@@ -1,0 +1,25 @@
+{
+  "article": [],
+  "blog": [],
+  "collection": [],
+  "company": [],
+  "company_location": [],
+  "location": [],
+  "market": [],
+  "order": [],
+  "page": [],
+  "product": [
+    {
+      "key": "trading-card-packaging",
+      "namespace": "shopify",
+      "name": "Trading card packaging",
+      "description": "Identifies how trading cards are packaged, such as blister pack or booster pack",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
+  "variant": [],
+  "shop": []
+}
