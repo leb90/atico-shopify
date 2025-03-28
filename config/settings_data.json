@@ -15,7 +15,7 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#ffffff",
+            "background": "#E0F7FA",
             "background_gradient": "",
             "text": "#121212",
             "button": "#FCE477",
@@ -194,6 +194,12 @@
         },
         "main-password-footer": {
           "type": "main-password-footer",
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
+        },
+        "header": {
+          "type": "header",
           "settings": {
             "color_scheme": "scheme-1"
           }
