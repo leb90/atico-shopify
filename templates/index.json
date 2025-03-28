@@ -9,21 +9,95 @@
  */
 {
   "sections": {
+    "slideshow_VH4ahn": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_Kq446b": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/upscalemedia-transformed.webp",
+            "image_overlay_opacity": 0,
+            "heading": "Journey Together",
+            "heading_size": "h1",
+            "subheading": "¡No te pierdas la nueva expansión de JCC Pokémon, ya a la venta: <em>Escarlata y Púrpura-Juntos de Aventuras</em>!",
+            "button_label": "Ver la nueva expansión",
+            "link": "https://tcg.pokemon.com/es-es/expansions/journey-together/",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "bottom-right",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_wgGnzy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-03-28_at_16.47.13_1.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "Leagues Cup",
+            "heading_size": "h1",
+            "subheading": "Experience the thrill of competitive Pokémon TCG at El Ático de Hisui. Earn points, climb the rankings.",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "bottom-right",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_cy3xNA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2025-03-28_at_16.47.01.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "<strong>Pokémon TCG & Merch</strong>",
+            "heading_size": "h1",
+            "subheading": "Discover exclusive cards, plushies, and collectibles — come visit and explore it all at El Ático de Hisui!",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "bottom-right",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_Kq446b",
+        "slide_wgGnzy",
+        "slide_cy3xNA"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 24,
         "title": "",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 24,
         "columns_desktop": 4,
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "outline",
-        "enable_desktop_slider": false,
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
@@ -39,6 +113,7 @@
     }
   },
   "order": [
+    "slideshow_VH4ahn",
     "featured_collection"
   ]
 }
