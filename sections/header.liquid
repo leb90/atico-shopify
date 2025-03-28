@@ -25,7 +25,8 @@
   .header {
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 0;
+    padding: 1.8rem;
+{% comment %}     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 0; {% endcomment %}
   }
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
@@ -95,10 +96,10 @@
   }
 
   @media screen and (min-width: 990px) {
-    .header {
+/*     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+    } */
   }
 {%- endstyle -%}
 
@@ -120,7 +121,7 @@
   endif
 %}
 
-<{{ header_tag }} {% if header_tag == 'sticky-header' %}data-sticky-type="{{ section.settings.sticky_header_type }}"{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<{{ header_tag }} {% if header_tag == 'sticky-header' %}data-sticky-type="{{ section.settings.sticky_header_type }}"{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %} mb-12">
   {%- liquid
     assign social_links = false
     assign localization_forms = false

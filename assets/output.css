@@ -392,6 +392,9 @@
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
+  .mb-12 {
+    margin-bottom: calc(var(--spacing) * 12);
+  }
   .box-border {
     box-sizing: border-box;
   }
