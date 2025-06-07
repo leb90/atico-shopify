@@ -1,0 +1,68 @@
+{% comment %}
+===============================================================================
+SISTEMA DE CONVERSIÓN DE MONEDA USD → ARS
+===============================================================================
+
+Este sistema convierte automáticamente precios de USD a ARS usando la API de DolarApi.com
+
+📋 COMPONENTES DEL SISTEMA:
+- assets/currency-converter.js  → JavaScript principal
+- assets/currency-converter.css → Estilos
+- snippets/currency-price.liquid → Snippet universal
+
+🔧 INSTALACIÓN:
+1. Los archivos JS y CSS ya están incluidos en layout/theme.liquid
+2. El sistema funciona automáticamente al cargar la página
+
+💰 CÓMO FUNCIONA:
+1. Detecta automáticamente precios en USD en toda la página
+2. Los convierte a ARS usando cotización en tiempo real
+3. Muestra precio ARS prominente y USD secundario
+
+🎯 USO DEL SNIPPET UNIVERSAL:
+
+{% render 'currency-price', price: product.price %}
+{% render 'currency-price', product: product %}
+{% render 'currency-price', variant: variant %}
+{% render 'currency-price', price: product.price, show_currency: false %}
+{% render 'currency-price', price: product.price, class: 'my-class' %}
+
+📝 PARÁMETROS:
+- price: Precio en centavos (ej: 5500 = $55.00)
+- product: Objeto producto de Shopify
+- variant: Variante específica
+- show_currency: true/false - mostrar "USD"
+- class: Clases CSS adicionales
+- style: Estilos inline
+
+🎨 PERSONALIZACIÓN CSS:
+.price-ars-main     → Precio principal en ARS
+.price-usd-secondary → Precio secundario en USD
+.currency-converted → Contenedor
+
+🛠️ DEBUGGING:
+Abrir consola del navegador y ejecutar:
+- window.findPrices()      → Buscar elementos con precios
+- window.retransformPrices() → Re-convertir precios
+- window.checkExchangeRate() → Ver cotización actual
+
+📍 DÓNDE SE APLICA AUTOMÁTICAMENTE:
+- Productos en grilla/colecciones
+- Páginas de producto individual
+- Carrito de compras
+- Cualquier elemento con clases .price-item, .money, etc.
+
+⚡ DETECCIÓN AUTOMÁTICA:
+El sistema busca elementos que contengan:
+- Texto como "$55.00 USD"
+- Elementos con clases de precio de Shopify
+- Nuestro snippet currency-price-wrapper
+
+🔄 EVENTOS QUE DISPARAN RE-CONVERSIÓN:
+- Carga de página
+- Cambio de sección Shopify
+- Cambio de variante
+- Cambios en el DOM
+
+===============================================================================
+{% endcomment %} 

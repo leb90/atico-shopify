@@ -1,0 +1,264 @@
+/* Estilos para el convertidor de moneda */
+
+/* Contenedor principal de precios convertidos */
+.currency-converted {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.2;
+}
+
+/* Precio principal en ARS */
+.price-ars-main {
+  font-weight: bold !important;
+  color: #1f2937 !important;
+  font-size: 1.2em !important;
+  display: block;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Precio secundario en USD */
+.price-usd-secondary {
+  color: #6b7280 !important;
+  font-size: 0.8em !important;
+  font-weight: normal !important;
+  display: block;
+  margin-top: 3px;
+  opacity: 0.8;
+  line-height: 1;
+}
+
+/* ========================================= */
+/* PRECIO MODERNO ESTILO APPLE */
+/* ========================================= */
+
+/* Contenedor principal del precio moderno */
+.modern-price-tag {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 10 !important;
+  display: inline-block !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: 0 !important;
+  padding: 8px 12px !important;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+
+
+.modern-price-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+/* Contenido del precio moderno */
+.modern-price-content .currency-converted {
+  text-align: center;
+  line-height: 1.1;
+}
+
+.modern-price-content .price-ars-main {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #111 !important;
+  letter-spacing: -0.01em;
+  margin: 0 !important;
+}
+
+.modern-price-content .price-usd-secondary {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 11px !important;
+  color: #666 !important;
+  opacity: 0.8;
+  margin-top: 1px !important;
+  letter-spacing: 0;
+}
+
+/* Animación de entrada */
+@keyframes priceAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modern-price-tag {
+  animation: priceAppear 0.3s ease-out forwards;
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 640px) {
+  .modern-price-tag {
+    padding: 6px 10px;
+  }
+  
+  .modern-price-content .price-ars-main {
+    font-size: 12px !important;
+  }
+  
+  .modern-price-content .price-usd-secondary {
+    font-size: 10px !important;
+  }
+}
+
+/* Variante para productos en oferta */
+.card__badge + * .modern-price-tag {
+  background: rgba(255, 245, 245, 0.95);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+.card__badge + * .modern-price-tag:hover {
+  background: rgba(255, 245, 245, 0.98);
+}
+
+.card__badge + * .modern-price-content .price-ars-main {
+  color: #dc2626 !important;
+}
+
+/* ========================================= */
+/* ESTILOS ORIGINALES PARA COMPATIBILIDAD */
+/* ========================================= */
+
+/* Estilos específicos para productos en oferta */
+.price__sale .price-ars-main {
+  color: #dc2626 !important; /* Rojo para ofertas */
+}
+
+/* Estilos para cards de productos */
+.card-wrapper .price-ars-main {
+  font-size: 1.1em !important;
+}
+
+.card-wrapper .price-usd-secondary {
+  font-size: 0.75em !important;
+}
+
+/* Estilos para el overlay de precio verde en card-product (LEGACY) */
+.bg-green-600 .currency-converted,
+.bg-green-600 .currency-price-wrapper {
+  color: white !important;
+}
+
+.bg-green-600 .price-ars-main {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bg-green-600 .price-usd-secondary {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos para el precio overlay en cards (LEGACY) */
+.product-card-overlay-price .price-ars-main {
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+}
+
+.product-card-overlay-price .price-usd-secondary {
+  font-size: 0.7em !important;
+  margin-top: 1px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 749px) {
+  .price-ars-main {
+    font-size: 1em !important;
+  }
+  
+  .price-usd-secondary {
+    font-size: 0.7em !important;
+    margin-top: 2px;
+  }
+
+  .card-wrapper .price-ars-main {
+    font-size: 0.9em !important;
+  }
+
+  .card-wrapper .price-usd-secondary {
+    font-size: 0.65em !important;
+  }
+}
+
+/* Estilos para elementos transformados */
+[data-currency-transformed] {
+  position: relative;
+}
+
+/* Animación suave para la transformación */
+.currency-converted {
+  animation: currencyFadeIn 0.3s ease-in-out;
+}
+
+@keyframes currencyFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-2px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+/* Estilos específicos para diferentes contextos */
+
+/* En grillas de productos */
+.grid__item .price-ars-main {
+  font-size: 1.1em !important;
+}
+
+/* En listados de productos */
+.product-item .price-ars-main {
+  font-size: 1.15em !important;
+}
+
+/* En páginas de producto individual */
+.product-form .price-ars-main {
+  font-size: 1.4em !important;
+}
+
+.product-form .price-usd-secondary {
+  font-size: 0.9em !important;
+  margin-top: 4px;
+}
+
+/* En carrito */
+.cart-item .price-ars-main {
+  font-size: 1em !important;
+}
+
+/* Asegurar que el texto no se corte */
+.currency-converted {
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* Para casos donde el precio está en un contenedor muy estrecho */
+@media screen and (max-width: 480px) {
+  .currency-converted {
+    white-space: normal;
+  }
+  
+  .price-ars-main,
+  .price-usd-secondary {
+    white-space: normal;
+    word-break: break-word;
+  }
+} 
