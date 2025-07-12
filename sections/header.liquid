@@ -1,3 +1,13 @@
+<style>
+@font-face {
+  font-family: 'Japon';
+  src: url('{{ 'Japon.ttf' | asset_url }}') format('truetype'),
+       url('{{ 'Japon.otf' | asset_url }}') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -19,13 +29,391 @@
   }
 
   .header-wrapper {
-    background-color: #E0F7FA;
+    background-color: #E53E3E !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 9 !important;
+  }
+
+  /* Asegurar que el section-header también tenga overflow visible */
+  .section-header {
+    overflow: visible !important;
   }
 
   .header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1.8rem;
+    background-color: #E53E3E !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 0;
+    color: #FFFFFF !important;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .header .header__heading-link,
+  .header .header__icon,
+  .header .list-menu__item,
+  .header .header__menu-item,
+  .header .header__heading,
+  .header .h2 {
+    color: #FFFFFF !important;
+  }
+
+  .header .header__heading,
+  .header .h2 {
+    font-family: 'Japon', serif !important;
+    font-weight: normal !important;
+    font-size: 2.8rem !important;
+    line-height: 1.2 !important;
+    color: #FFFFFF !important;
+  }
+
+  .header .header__icon svg {
+    color: #FFFFFF !important;
+  }
+
+  .header .cart-count-bubble {
+    background-color: #FFFFFF !important;
+    color: #E53E3E !important;
+    border: 2px solid #FFFFFF !important;
+  }
+
+  /* Contenedor del título - centrado horizontalmente FORZADO */
+  .header__heading {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+    text-align: center !important;
+  }
+
+  .header__heading-link {
+    text-decoration: none !important;
+    display: block !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Reglas específicas para diferentes páginas */
+  .header--middle-left .header__heading,
+  .header--middle-center .header__heading,
+  .header--top-left .header__heading,
+  .header--top-center .header__heading {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Forzar centrado en todas las páginas */
+  .template-index .header__heading,
+  .template-product .header__heading,
+  .template-collection .header__heading,
+  .template-page .header__heading,
+  .template-blog .header__heading,
+  .template-article .header__heading,
+  .template-search .header__heading,
+  .template-cart .header__heading {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Buscador dropdown personalizado */
+  .header__search {
+    position: relative;
+  }
+
+  /* Campo de búsqueda */
+  .search-modal__form .field {
+    position: relative !important;
+    margin-bottom: 0 !important;
+  }
+
+  .search-modal__form .search__input {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    padding-right: 85px !important;
+    border: 2px solid #e5e5e5 !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    background: white !important;
+    color: #333 !important;
+    transition: border-color 0.3s ease !important;
+  }
+
+  .search-modal__form .search__input:focus {
+    outline: none !important;
+    border-color: #E53E3E !important;
+  }
+
+  .search-modal__form .search__input::placeholder {
+    color: #999 !important;
+  }
+
+  .search-modal__form .field__label {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+
+  /* Botones del buscador */
+  .search-modal__form .search__button {
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: #E53E3E !important;
+    color: white !important;
+    border: none !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .search-modal__form .search__button:hover {
+    background: #d63031 !important;
+  }
+
+  .search-modal__form .reset__button {
+    position: absolute !important;
+    right: 45px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: #666 !important;
+    color: white !important;
+    border: none !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .search-modal__form .reset__button:hover {
+    background: #999 !important;
+  }
+
+  /* Botón de cerrar */
+  .search-modal__close-button {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: none !important;
+    border: none !important;
+    color: #666 !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+  }
+
+  /* Resultados de búsqueda predictiva */
+  .predictive-search--header {
+    margin-top: 16px !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Z-index ya definido arriba */
+
+  /* REGLA MOVIDA ABAJO - REMOVIDA DUPLICADA */
+
+  /* No scroll lock */
+  body, html {
+    overflow: auto !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+  }
+
+  /* Prevenir desplazamiento lateral */
+  body[style*="overflow"] {
+    overflow: auto !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+  }
+
+    /* Iconos del header en su posición correcta */
+  .header__icons {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 3;
+  }
+
+  /* Estilos específicos para el botón de búsqueda */
+  .header__icon--search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+  }
+
+  .header__icon--search:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .header__icon--search svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header__heading-logo-wrapper {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .header-logo {
+    height: 80px !important;
+    width: 80px !important;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .header-title {
+    white-space: nowrap;
+    margin: 0;
+  }
+
+
+
+  /* Mobile adjustments */
+  @media screen and (max-width: 749px) {
+    .header {
+      height: 70px;
+    }
+
+    .header .header__heading,
+    .header .h2 {
+      font-size: 2.4rem !important;
+    }
+
+    .header-logo {
+      height: 70px !important;
+      width: 70px !important;
+    }
+
+    .header__heading-logo-wrapper {
+      width: 70px;
+    }
+
+    .header__icons {
+      gap: 0.5rem;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .header {
+      height: 60px;
+    }
+
+    .header .header__heading,
+    .header .h2 {
+      font-size: 1.8rem !important;
+    }
+
+    .header-logo {
+      height: 60px !important;
+      width: 60px !important;
+    }
+
+    .header__heading-logo-wrapper {
+      width: 60px;
+    }
+  }
+
+  /* BUSCADOR CONVERTIDO A DROPDOWN SIMPLE */
+  .header__search details-modal {
+    position: static !important;
+    display: block !important;
+  }
+
+  .header__search details {
+    position: relative !important;
+  }
+
+  .header__search details[open] .search-modal.modal__content {
+    position: relative !important;
+    top: 10px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    padding: 15px !important;
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+    z-index: 1000 !important;
+    transform: none !important;
+    display: block !important;
+    overflow: visible !important;
+    inset: auto !important;
+  }
+
+  .header__search details:not([open]) .search-modal.modal__content {
+    display: none !important;
+  }
+
+  /* Remover overlay completamente */
+  .header__search .modal-overlay {
+    display: none !important;
+  }
+
+  /* Asegurar que no se mueva la página */
+  body.modal-open,
+  body[style*="overflow"],
+  html[style*="overflow"] {
+    overflow: auto !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header__search details[open] .search-modal.modal__content {
+      width: 100% !important;
+      max-width: 95vw !important;
+      padding: 20px !important;
+      margin: 0 auto !important;
+    }
   }
 
   .header__content {
@@ -150,15 +538,19 @@
       endif
     -%}
 
+    <!-- Logo cuadrado en la esquina izquierda -->
+    <div class="header__heading-logo-wrapper">
+      <a href="{{ routes.root_url }}">
+        <img src="{{ 'atico.jpg' | asset_url }}" alt="Atico Logo" class="header-logo" width="80" height="80" loading="lazy">
+      </a>
+    </div>
+
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            <div class="header__heading-logo-wrapper !flex items-center gap-4">
-              <img src="{{ 'atico.jpg' | asset_url }}" alt="Atico Logo" class="w-12 h-12" width="48" height="48" loading="lazy">
-              <span class="h2">{{ shop.name }}</span>
-            </div>
+            <span class="h2 header-title">El Atico de Hisui</span>
           </a>
       {%- if request.page_type == 'index' -%}
         </h1>
@@ -197,7 +589,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              <span class="h2 header-title">El Atico de Hisui</span>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

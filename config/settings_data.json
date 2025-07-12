@@ -10,9 +10,9 @@
 {
   "current": {
     "logo_width": 100,
-    "type_header_font": "inter_n4",
+    "type_header_font": "playfair_display_n4",
     "heading_scale": 100,
-    "type_body_font": "inter_n4",
+    "type_body_font": "source_sans_pro_n4",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
@@ -142,7 +142,7 @@
       "header": {
         "type": "header",
         "settings": {
-          "color_scheme": "scheme-1"
+          "color_scheme": "scheme-2"
         }
       }
     },
@@ -150,22 +150,22 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#e0f7fa",
+          "background": "#FFFFFF",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#fce477",
-          "button_label": "#121212",
+          "button": "#E53E3E",
+          "button_label": "#FFFFFF",
           "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "shadow": "#2D3748"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#f3f3f3",
+          "background": "#E0F7FA",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#121212",
-          "button_label": "#f3f3f3",
+          "button": "#FCE477",
+          "button_label": "#121212",
           "secondary_button_label": "#121212",
           "shadow": "#121212"
         }
