@@ -15,13 +15,13 @@
         "slide_Kq446b": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/upscalemedia-transformed.webp",
+            "image": "shopify://shop_images/1a53c2f3-a56c-44a7-ab56-05ba0ac07ddc.__CR0_0_970_600_PT0_SX970_V1.png",
             "image_overlay_opacity": 0,
-            "heading": "Journey Together",
+            "heading": "Destined Rivals",
             "heading_size": "h1",
-            "subheading": "¡No te pierdas la nueva expansión de JCC Pokémon, ya a la venta: <em>Escarlata y Púrpura-Juntos de Aventuras</em>!",
+            "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta: <em>Escarlata y Púrpura-Juntos de Aventuras</em>!",
             "button_label": "Ver la nueva expansión",
-            "link": "https://tcg.pokemon.com/es-es/expansions/journey-together/",
+            "link": "https://tcg.pokemon.com/es-es/expansions/destined-rivals/",
             "button_style_secondary": false,
             "show_text_box": true,
             "box_align": "bottom-right",
@@ -110,10 +110,51 @@
         "padding_top": 0,
         "padding_bottom": 36
       }
+    },
+    "collage_hJqrm6": {
+      "type": "collage",
+      "blocks": {
+        "image_LyY4YW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/918MEzNZnfL._SL1500.jpg"
+          }
+        },
+        "product_4QxpW8": {
+          "type": "product",
+          "settings": {
+            "product": "pokemon-tcg-scarlet-and-violet-paradox-rift-elite-trainer-box-roaring-moon",
+            "second_image": false
+          }
+        },
+        "collection_zjYafr": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        }
+      },
+      "block_order": [
+        "image_LyY4YW",
+        "product_4QxpW8",
+        "collection_zjYafr"
+      ],
+      "name": "t:sections.collage.presets.name",
+      "settings": {
+        "heading": "Collage multimedia",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "slideshow_VH4ahn",
-    "featured_collection"
+    "featured_collection",
+    "collage_hJqrm6"
   ]
 }

@@ -8,15 +8,15 @@ class CheckoutPriceConverter {
   }
 
   async init() {
-    console.log('🚀 Checkout Price Converter iniciado');
+    console.log('🚀 Checkout Price Converter iniciado (MODO VISUAL SOLAMENTE)');
     
     // Obtener cotización actual
     await this.getExchangeRate();
     
-    // Interceptar botones de checkout
+    // Solo detectar clicks, no interceptar
     this.interceptCheckoutButtons();
     
-    // Interceptar navigation al checkout
+    // No interceptar navegación
     this.interceptCheckoutNavigation();
   }
 
@@ -35,86 +35,70 @@ class CheckoutPriceConverter {
   }
 
   interceptCheckoutButtons() {
-    // Intercept main checkout buttons
+    // DESHABILITADO: No interceptar checkout ya que solo es visual
+    console.log('💰 Checkout converter en modo visual - no intercepta botones');
+    
+    // Solo guardar info para referencia, sin interceptar
     const checkoutButtons = document.querySelectorAll('button[name="checkout"], input[name="checkout"], a[href*="checkout"]');
     
     checkoutButtons.forEach(button => {
       button.addEventListener('click', async (event) => {
         if (this.isEnabled) {
-          console.log('🔄 Interceptando checkout...');
-          event.preventDefault();
+          console.log('🔄 Click en checkout detectado (modo visual)');
+          // NO hacer preventDefault() - dejar que funcione normalmente
           
-          await this.convertCartPrices();
-          
-          // Continue with original checkout
-          if (button.type === 'submit' || button.tagName === 'BUTTON') {
-            button.form?.submit();
-          } else if (button.href) {
-            window.location.href = button.href;
-          }
+          // Solo guardar información sin interceptar
+          await this.modifyCheckoutUrl();
         }
       });
     });
   }
 
   interceptCheckoutNavigation() {
-    // Intercept any programmatic navigation to checkout
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
+    // DESHABILITADO: No interceptar navegación ya que solo es visual
+    console.log('🔄 Navegación de checkout en modo visual - sin interceptación');
     
-    history.pushState = async function(state, title, url) {
-      if (url && url.includes('checkout')) {
-        await window.checkoutConverter?.convertCartPrices();
-      }
-      return originalPushState.apply(history, arguments);
-    };
-    
-    history.replaceState = async function(state, title, url) {
-      if (url && url.includes('checkout')) {
-        await window.checkoutConverter?.convertCartPrices();
-      }
-      return originalReplaceState.apply(history, arguments);
-    };
+    // No modificar history.pushState ni history.replaceState
+    // Dejar que la navegación funcione normalmente
   }
 
   async convertCartPrices() {
     try {
-      console.log('💱 Preparando checkout con conversión USD → ARS...');
+      console.log('💱 Guardando info de conversión (modo visual)...');
       
-      // Store conversion info for checkout
+      // Solo guardar información para referencia
       await this.modifyCheckoutUrl();
       
-      // Try to change shop currency to ARS for this session
-      await this.switchToARSCurrency();
+      // NO intentar cambiar la moneda real en Shopify
+      console.log('💰 Conversión visual completada');
       
     } catch (error) {
-      console.error('❌ Error preparando checkout:', error);
+      console.error('❌ Error guardando info:', error);
     }
   }
 
   async switchToARSCurrency() {
-    try {
-      // Try to switch currency to ARS using Shopify's currency API
-      const currencyForm = new FormData();
-      currencyForm.append('form_type', 'currency');
-      currencyForm.append('currency_code', 'ARS');
-      currencyForm.append('return_to', window.location.pathname);
-
-      const response = await fetch('/localization', {
-        method: 'POST',
-        body: currencyForm
-      });
-
-      if (response.ok) {
-        console.log('✅ Cambiado a moneda ARS para checkout');
-        // Wait a bit for the change to take effect
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } else {
-        console.log('⚠️ No se pudo cambiar moneda, continuando con USD');
-      }
-    } catch (error) {
-      console.log('⚠️ Error cambiando moneda:', error);
-    }
+    // MÉTODO DESHABILITADO: Causaba error 404 en /localization
+    // Solo para conversión visual, no cambiar moneda real
+    console.log('💰 switchToARSCurrency() deshabilitado - solo modo visual');
+    return;
+    
+    // CÓDIGO ORIGINAL COMENTADO:
+    // try {
+    //   const currencyForm = new FormData();
+    //   currencyForm.append('form_type', 'currency');
+    //   currencyForm.append('currency_code', 'ARS');
+    //   currencyForm.append('return_to', window.location.pathname);
+    //   const response = await fetch('/localization', { method: 'POST', body: currencyForm });
+    //   if (response.ok) {
+    //     console.log('✅ Cambiado a moneda ARS para checkout');
+    //     await new Promise(resolve => setTimeout(resolve, 1000));
+    //   } else {
+    //     console.log('⚠️ No se pudo cambiar moneda, continuando con USD');
+    //   }
+    // } catch (error) {
+    //   console.log('⚠️ Error cambiando moneda:', error);
+    // }
   }
 
   // Alternative approach: Modify checkout URL to include currency parameter

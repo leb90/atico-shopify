@@ -28,6 +28,34 @@
   line-height: 1;
 }
 
+/* Estilos específicos para elementos .money */
+.money.currency-converted,
+.money [data-currency-transformed] {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.money .price-ars-main,
+.money.currency-converted .price-ars-main {
+  font-weight: bold !important;
+  color: #1f2937 !important;
+  font-size: 1.2em !important;
+  display: block;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.money .price-usd-secondary,
+.money.currency-converted .price-usd-secondary {
+  color: #6b7280 !important;
+  font-size: 0.8em !important;
+  font-weight: normal !important;
+  display: block;
+  margin-top: 3px;
+  opacity: 0.8;
+  line-height: 1;
+}
+
 /* ========================================= */
 /* PRECIO MODERNO ESTILO APPLE */
 /* ========================================= */
@@ -239,7 +267,64 @@
   margin-top: 4px;
 }
 
-/* En carrito */
+/* En carrito y checkout */
+.cart__footer .price-item .price-ars-main,
+.cart-drawer__footer .price-item .price-ars-main,
+.totals__total-value .price-item .price-ars-main,
+.checkout-total .money .price-ars-main,
+.checkout-subtotal .money .price-ars-main,
+.payment-summary .money .price-ars-main,
+.order-summary .money .price-ars-main {
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+
+.cart__footer .price-item .price-usd-secondary,
+.cart-drawer__footer .price-item .price-usd-secondary,
+.totals__total-value .price-item .price-usd-secondary,
+.checkout-total .money .price-usd-secondary,
+.checkout-subtotal .money .price-usd-secondary,
+.payment-summary .money .price-usd-secondary,
+.order-summary .money .price-usd-secondary {
+  font-size: 1em !important;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* Ajustar el contenedor del total */
+.totals__total-value .currency-price-wrapper {
+  display: block !important;
+  text-align: right;
+}
+
+.totals__total-value .currency-converted {
+  display: block !important;
+  text-align: right;
+}
+
+/* Para móviles */
+@media screen and (max-width: 749px) {
+  .cart__footer .price-item .price-ars-main,
+  .cart-drawer__footer .price-item .price-ars-main,
+  .totals__total-value .price-item .price-ars-main,
+  .checkout-total .money .price-ars-main,
+  .checkout-subtotal .money .price-ars-main,
+  .payment-summary .money .price-ars-main,
+  .order-summary .money .price-ars-main {
+    font-size: 1.3em !important;
+  }
+  
+  .cart__footer .price-item .price-usd-secondary,
+  .cart-drawer__footer .price-item .price-usd-secondary,
+  .totals__total-value .price-item .price-usd-secondary,
+  .checkout-total .money .price-usd-secondary,
+  .checkout-subtotal .money .price-usd-secondary,
+  .payment-summary .money .price-usd-secondary,
+  .order-summary .money .price-usd-secondary {
+    font-size: 0.9em !important;
+  }
+}
 .cart-item .price-ars-main {
   font-size: 1em !important;
 }

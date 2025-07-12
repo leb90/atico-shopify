@@ -64,7 +64,7 @@ class GlobalCurrencyTransformer {
       if (priceUsdAttr) {
         const price = parseFloat(priceUsdAttr);
         if (price >= 0.25 && price <= 10000) {
-          console.log(`✅ Precio extraído de data-price-usd: $${price}`);
+          console.log(`✅ Precio extraído de data-price-usd (ya en dólares): $${price}`);
           return price;
         }
       }
@@ -140,13 +140,20 @@ class GlobalCurrencyTransformer {
     let transformedCount = 0;
 
     try {
-      // PRIMERA FASE: Elementos específicos de precio de Shopify
+      // PRIMERA FASE: Elementos específicos de precio de Shopify (INCLUYE CHECKOUT)
       const shopifyPriceSelectors = [
-        '.currency-price-wrapper:not([data-currency-transformed]):not(:has(.currency-converted))',
         '.price-item:not([data-currency-transformed]):not(:has(.currency-converted))',
         '.price-item--regular:not([data-currency-transformed]):not(:has(.currency-converted))',
         '.price-item--sale:not([data-currency-transformed]):not(:has(.currency-converted))',
-        '.money:not([data-currency-transformed]):not(:has(.currency-converted))'
+        '.money:not([data-currency-transformed]):not(:has(.currency-converted))',
+        '.totals__total-value .price-item:not([data-currency-transformed])',
+        '.cart-drawer__footer .price-item:not([data-currency-transformed])',
+        '.cart__footer .price-item:not([data-currency-transformed])',
+        // Selectores específicos para checkout
+        '.checkout-total .money:not([data-currency-transformed])',
+        '.checkout-subtotal .money:not([data-currency-transformed])',
+        '.payment-summary .money:not([data-currency-transformed])',
+        '.order-summary .money:not([data-currency-transformed])'
       ];
 
       shopifyPriceSelectors.forEach(selector => {
@@ -204,29 +211,46 @@ class GlobalCurrencyTransformer {
     // Mantener clases originales del elemento
     const originalClasses = element.className;
     
-    // Asegurar que el elemento padre tenga posición relativa
-    if (element.closest('.card-wrapper, .product-card, .card')) {
-      const cardContainer = element.closest('.card-wrapper, .product-card, .card');
-      cardContainer.style.position = 'relative';
+    // Detectar si es un elemento del carrito o checkout (totales)
+    const isCartTotal = element.closest('.totals__total-value, .cart-drawer__footer, .cart__footer, .totals, .checkout-total, .checkout-subtotal, .payment-summary, .order-summary');
+    
+    if (isCartTotal) {
+      // Estilo SIMPLE para totales del carrito
+      element.innerHTML = `
+        <div class="currency-converted" data-converted="true">
+          <span class="price-ars-main">
+            ${formattedArs}
+          </span>
+          <span class="price-usd-secondary">
+            ${formattedUsd}
+          </span>
+        </div>
+      `;
     } else {
-      element.parentElement.style.position = 'relative';
-    }
+      // Estilo MODERNO para productos en cards
+      // Asegurar que el elemento padre tenga posición relativa
+      if (element.closest('.card-wrapper, .product-card, .card')) {
+        const cardContainer = element.closest('.card-wrapper, .product-card, .card');
+        cardContainer.style.position = 'relative';
+      } else {
+        element.parentElement.style.position = 'relative';
+      }
 
-    // Crear la nueva estructura visual con estilo moderno rectangular blanco
-    element.innerHTML = `
-      <div class="modern-price-tag">
-        <div class="modern-price-content">
-          <div class="currency-converted" data-converted="true">
-            <span class="price-ars-main">
-              ${formattedArs}
-            </span>
-            <span class="price-usd-secondary">
-              ${formattedUsd}
-            </span>
+      element.innerHTML = `
+        <div class="modern-price-tag">
+          <div class="modern-price-content">
+            <div class="currency-converted" data-converted="true">
+              <span class="price-ars-main">
+                ${formattedArs}
+              </span>
+              <span class="price-usd-secondary">
+                ${formattedUsd}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    }
 
     // Marcar como procesado de MÚLTIPLES formas
     this.processedElements.add(element);
@@ -249,8 +273,12 @@ class GlobalCurrencyTransformer {
   }
 
   observeChanges() {
-    // Observador MÁS RESTRICTIVO
+    // Observador SIMPLE - que funcione en toda la página incluyendo checkout
     const observer = new MutationObserver((mutations) => {
+      if (this.isTransforming) {
+        return;
+      }
+      
       let shouldRetransform = false;
       
       mutations.forEach((mutation) => {
@@ -275,7 +303,7 @@ class GlobalCurrencyTransformer {
               return false;
             }
             
-            // Solo considerar si tiene contenido USD que NO sea ARS
+            // Detectar cambios que contengan precios USD
             const text = node.textContent || '';
             const hasUSD = text.includes('USD') && !text.includes('ARS');
             const hasDollarSign = text.includes('$') && !text.includes('ARS');
@@ -296,7 +324,7 @@ class GlobalCurrencyTransformer {
           if (!this.isTransforming) {
             this.transformAllPrices();
           }
-        }, 5000); // Delay más largo
+        }, 2000); // Delay normal
       }
     });
 
@@ -328,6 +356,37 @@ class GlobalCurrencyTransformer {
     });
     
     this.transformAllPrices();
+  }
+
+  // Función específica para reconvertir totales del carrito Y checkout
+  retransformCartTotals() {
+    console.log('🛒 Reconvirtiendo totales del carrito y checkout...');
+    
+    // Buscar elementos específicos del total del carrito Y checkout
+    const cartTotalSelectors = [
+      '.totals__total-value .price-item',
+      '.cart-drawer__footer .price-item',
+      '.cart__footer .price-item',
+      // También elementos de checkout
+      '.checkout-total .money',
+      '.checkout-subtotal .money',
+      '.payment-summary .money',
+      '.order-summary .money'
+    ];
+    
+    cartTotalSelectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(element => {
+        // Remover de procesados para permitir reconversión
+        this.processedElements.delete(element);
+        element.removeAttribute('data-currency-transformed');
+        
+        // Forzar transformación del elemento
+        if (this.transformPriceElement(element)) {
+          console.log('🛒 ✅ Total del carrito reconvertido');
+        }
+      });
+    });
   }
 
   // Método para actualizar cotización manualmente
@@ -390,17 +449,25 @@ window.checkExchangeRate = () => {
   }
 };
 
+window.retransformCartTotals = () => {
+  if (window.currencyTransformer) {
+    window.currencyTransformer.retransformCartTotals();
+  } else {
+    console.log('⚠️ Transformer not ready yet');
+  }
+};
+
 // Inicializar
 initTransformer();
 
-// Solo eventos críticos de Shopify (MENOS FRECUENTES)
+// Eventos de Shopify para re-transformar precios
 document.addEventListener('shopify:section:load', () => {
   console.log('🔄 Sección de Shopify cargada');
   setTimeout(() => {
     if (window.currencyTransformer && !window.currencyTransformer.isTransforming) {
       window.currencyTransformer.transformAllPrices();
     }
-  }, 2000);
+  }, 1500);
 });
 
 document.addEventListener('variant:change', () => {
@@ -409,5 +476,15 @@ document.addEventListener('variant:change', () => {
     if (window.currencyTransformer && !window.currencyTransformer.isTransforming) {
       window.currencyTransformer.transformAllPrices();
     }
-  }, 1500);
+  }, 1000);
+});
+
+// Eventos específicos del carrito para reconvertir totales
+document.addEventListener('cart:updated', () => {
+  console.log('🛒 Carrito actualizado');
+  setTimeout(() => {
+    if (window.currencyTransformer) {
+      window.currencyTransformer.retransformCartTotals();
+    }
+  }, 1000);
 }); 
