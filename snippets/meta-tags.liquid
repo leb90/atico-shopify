@@ -13,11 +13,23 @@
   endif
 %}
 
+<!-- Essential SEO Meta Tags -->
+<meta name="robots" content="index, follow">
+<meta name="author" content="{{ shop.name }}">
+<meta name="generator" content="Shopify">
+{%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+{%- elsif shop.description -%}
+  <meta name="description" content="{{ shop.description | escape }}">
+{%- endif -%}
+
+<!-- Open Graph Meta Tags -->
 <meta property="og:site_name" content="{{ shop.name }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
+<meta property="og:locale" content="{{ request.locale.iso_code }}">
 
 {%- if page_image -%}
   <meta property="og:image" content="http:{{ page_image | image_url }}">
@@ -33,7 +45,17 @@
 
 {%- if settings.social_twitter_link != blank -%}
   <meta name="twitter:site" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
+  <meta name="twitter:creator" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
 {%- endif -%}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title | escape }}">
 <meta name="twitter:description" content="{{ og_description | escape }}">
+
+<!-- Additional SEO Meta Tags -->
+<meta name="theme-color" content="#E53E3E">
+<meta name="msapplication-TileColor" content="#E53E3E">
+{%- if request.page_type == 'product' and product -%}
+  <meta property="product:brand" content="{{ product.vendor | escape }}">
+  <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+  <meta property="product:condition" content="new">
+{%- endif -%}

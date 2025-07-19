@@ -292,12 +292,24 @@
       >
     {%- endif -%}
 
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
+    
+    <!-- Load main CSS with performance optimization -->
+    <link
+      rel="stylesheet"
+      href="{{ 'output.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+    <noscript>{{ "output.css" | asset_url | stylesheet_tag }}</noscript>
+
     <script>
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-    {{ "output.css" | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
