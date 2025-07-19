@@ -2,7 +2,8 @@ class CollectionsSidebar extends HTMLElement {
   constructor() {
     super();
     
-    this.toggleButton = this.querySelector('#collections-sidebar-toggle button');
+    this.toggleButton = this.querySelector('#collections-sidebar-toggle');
+    this.mobileToggleButton = document.querySelector('#header-collections-mobile-toggle');
     this.container = this.querySelector('#collections-sidebar-container');
     this.closeButton = this.querySelector('#collections-sidebar-close');
     this.overlay = this.querySelector('#collections-sidebar-overlay');
@@ -16,32 +17,67 @@ class CollectionsSidebar extends HTMLElement {
   init() {
     console.log('🎯 Inicializando Collections Sidebar...', {
       toggleButton: !!this.toggleButton,
-      container: !!this.container
+      mobileToggleButton: !!this.mobileToggleButton,
+      container: !!this.container,
+      isMobile: window.innerWidth <= 749
     });
     
-    if (!this.toggleButton || !this.container) {
-      console.error('❌ Elementos requeridos no encontrados para Collections Sidebar');
+    if (!this.container) {
+      console.error('❌ Container no encontrado para Collections Sidebar');
       return;
     }
     
-    // Forzar visibilidad del botón de múltiples maneras
+    // En móvil, no necesitamos el botón desktop
+    if (window.innerWidth <= 749 && !this.mobileToggleButton) {
+      console.error('❌ Botón móvil no encontrado');
+      return;
+    }
+    
+    if (window.innerWidth > 749 && !this.toggleButton) {
+      console.error('❌ Botón desktop no encontrado');
+      return;
+    }
+    
+    // Gestionar visibilidad del botón según el dispositivo
     const toggleButtonElement = this.querySelector('.collections-sidebar__toggle-button');
     if (toggleButtonElement) {
-      toggleButtonElement.style.cssText = `
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: fixed !important;
-        left: 0 !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        z-index: 101 !important;
-      `;
-      console.log('✅ Botón de toggle forzado a visible con estilos inline');
+      if (window.innerWidth > 749) {
+        // Desktop: mostrar botón
+        toggleButtonElement.style.cssText = `
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          position: fixed !important;
+          left: 0 !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          z-index: 50 !important;
+          flex-direction: column !important;
+          align-items: center !important;
+        `;
+        console.log('✅ Botón desktop mostrado');
+      } else {
+        // Móvil: OCULTAR COMPLETAMENTE Y PARA SIEMPRE
+        toggleButtonElement.style.cssText = `
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+          left: -9999px !important;
+          width: 0 !important;
+          height: 0 !important;
+          overflow: hidden !important;
+          transform: translateX(-9999px) !important;
+          position: absolute !important;
+        `;
+        toggleButtonElement.remove(); // Eliminar del DOM en móvil
+        console.log('✅ Botón desktop ELIMINADO en móvil');
+      }
     }
     
     // Event listeners para abrir/cerrar
-    this.toggleButton.addEventListener('click', this.open.bind(this));
+    this.toggleButton?.addEventListener('click', this.open.bind(this));
+    this.mobileToggleButton?.addEventListener('click', this.open.bind(this));
     this.closeButton?.addEventListener('click', this.close.bind(this));
     this.overlay?.addEventListener('click', this.close.bind(this));
     
@@ -61,6 +97,9 @@ class CollectionsSidebar extends HTMLElement {
       }
     });
     
+    // Listener para cambio de tamaño de ventana
+    window.addEventListener('resize', this.handleResize.bind(this));
+    
     console.log('🎯 Collections Sidebar inicializada correctamente');
   }
   
@@ -70,6 +109,17 @@ class CollectionsSidebar extends HTMLElement {
     this.isOpen = true;
     this.container.classList.add('is-open');
     document.body.classList.add('collections-sidebar-open');
+    
+    // Ocultar botón desktop manualmente
+    if (this.toggleButton) {
+      this.toggleButton.style.cssText = `
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateY(-50%) translateX(-100%) !important;
+      `;
+    }
     
     // Prevent body scroll
     this.preventBodyScroll(true);
@@ -91,11 +141,32 @@ class CollectionsSidebar extends HTMLElement {
     this.container.classList.remove('is-open');
     document.body.classList.remove('collections-sidebar-open');
     
+    // Restaurar botón desktop (solo si no es móvil)
+    if (this.toggleButton && window.innerWidth > 749) {
+      this.toggleButton.style.cssText = `
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 50 !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        pointer-events: auto !important;
+      `;
+    }
+    
     // Restore body scroll
     this.preventBodyScroll(false);
     
     // Return focus to toggle button
-    this.toggleButton?.focus();
+    if (window.innerWidth > 749) {
+      this.toggleButton?.focus();
+    } else {
+      this.mobileToggleButton?.focus();
+    }
     
     // Anunciar para lectores de pantalla
     this.announceForScreenReaders('Sidebar de categorías cerrada');
@@ -204,6 +275,47 @@ class CollectionsSidebar extends HTMLElement {
     }, 1000);
   }
   
+  handleResize() {
+    const toggleButtonElement = this.querySelector('.collections-sidebar__toggle-button');
+    if (!toggleButtonElement) return;
+    
+    if (window.innerWidth > 749) {
+      // Desktop: mostrar botón (solo si la sidebar no está abierta)
+      if (!this.isOpen) {
+        toggleButtonElement.style.cssText = `
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          position: fixed !important;
+          left: 0 !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          z-index: 50 !important;
+          flex-direction: column !important;
+          align-items: center !important;
+        `;
+      }
+    } else {
+      // Móvil: ELIMINAR BOTÓN DESKTOP PARA SIEMPRE
+      toggleButtonElement.style.cssText = `
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        transform: translateX(-9999px) !important;
+      `;
+      // Intentar eliminar del DOM si es posible
+      try {
+        toggleButtonElement.remove();
+      } catch(e) {
+        // Si no se puede eliminar, al menos ocultarlo completamente
+      }
+    }
+  }
+
   // Método para abrir desde código externo si es necesario
   toggle() {
     if (this.isOpen) {
@@ -222,87 +334,209 @@ customElements.define('collections-sidebar', CollectionsSidebar);
 // Exportar para uso en otros archivos si es necesario
 window.CollectionsSidebar = CollectionsSidebar;
 
+// Función para reorganizar elementos en móvil
+function reorganizeMobileLayout() {
+  const isMobile = window.innerWidth <= 749;
+  
+  // Limpiar contenedor móvil si estamos en desktop
+  if (!isMobile) {
+    const leftContainer = document.querySelector('.header__left-mobile');
+    const categoriesButton = document.querySelector('#header-collections-mobile-toggle');
+    const headerIcons = document.querySelector('.header__icons');
+    
+    if (leftContainer) {
+      // Limpiar todos los estilos inline para que CSS controle la visibilidad
+      leftContainer.style.cssText = '';
+      leftContainer.style.display = 'none';
+      console.log('💻 Desktop detectado - ocultando contenedor móvil');
+    }
+    
+    // Mover botón de categorías de vuelta a headerIcons si es necesario
+    if (categoriesButton && headerIcons && !headerIcons.contains(categoriesButton)) {
+      headerIcons.appendChild(categoriesButton);
+      console.log('💻 Botón de categorías movido de vuelta a headerIcons');
+    }
+    
+    // Limpiar estilos inline del headerIcons para desktop
+    if (headerIcons) {
+      headerIcons.style.cssText = '';
+      console.log('💻 Estilos de headerIcons limpiados para desktop');
+    }
+    
+    return; // Salir de la función en desktop
+  }
+  
+  if (isMobile) {
+    console.log('📱 Reorganizando layout para móvil...');
+    
+    // Elementos a mover
+    const searchModal = document.querySelector('.header__search');
+    const categoriesButton = document.querySelector('#header-collections-mobile-toggle');
+    const headerIcons = document.querySelector('.header__icons');
+    const header = document.querySelector('.header');
+    
+        if (categoriesButton && headerIcons && header) {
+      console.log('🔍 Elementos encontrados:', {
+        categoriesButton: !!categoriesButton,
+        headerIcons: !!headerIcons,
+        header: !!header
+      });
+      
+      // Verificar y forzar visibilidad del botón de búsqueda
+      const searchModal = document.querySelector('.header__search');
+      if (searchModal) {
+        searchModal.style.cssText = `
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        `;
+        console.log('✅ Forzando visibilidad del botón de búsqueda');
+      } else {
+        console.error('❌ No se encontró el botón de búsqueda');
+      }
+      
+      // 1. Mover SOLO el botón de categorías A LA IZQUIERDA del header
+      // Crear contenedor para el botón a la izquierda
+      let leftContainer = document.querySelector('.header__left-mobile');
+      if (!leftContainer) {
+        leftContainer = document.createElement('div');
+        leftContainer.className = 'header__left-mobile';
+        leftContainer.style.cssText = `
+          position: absolute;
+          left: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 3;
+        `;
+        header.appendChild(leftContainer);
+        console.log('✅ Contenedor izquierdo creado');
+      }
+      
+      // Solo mover si no está ya en el contenedor izquierdo
+      if (!leftContainer.contains(categoriesButton)) {
+        leftContainer.appendChild(categoriesButton);
+        console.log('✅ Botón de categorías movido a la izquierda');
+      } else {
+        console.log('ℹ️ Botón de categorías ya está a la izquierda');
+      }
+      
+      // 2. SOLO ajustar posición del contenedor de iconos (sin tocar su contenido)
+      headerIcons.style.cssText = `
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 3 !important;
+      `;
+      
+      console.log('🎯 Layout móvil reorganizado - categorías a la izquierda, iconos intactos');
+      } else {
+        console.error('❌ No se encontraron elementos necesarios para reorganizar:', {
+          categoriesButton: !!categoriesButton,
+          headerIcons: !!headerIcons,
+          header: !!header
+        });
+      }
+  } else {
+    console.log('💻 Modo desktop - no reorganizar');
+  }
+}
+
 // Verificar que el componente se cargue correctamente
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🚀 DOM cargado, verificando Collections Sidebar...');
   
+  // Reorganizar layout móvil
+  reorganizeMobileLayout();
+  
+  // También verificar en resize
+  window.addEventListener('resize', reorganizeMobileLayout);
+  
+  // FORZAR tamaño de fuente del título con JavaScript
+  function forceHeaderTitleSize() {
+    const headerTitle = document.querySelector('.header-title');
+    if (headerTitle) {
+      const isMobile = window.innerWidth <= 749;
+      const isDesktop = window.innerWidth >= 990;
+      
+      let fontSize = '3rem'; // Tamaño base
+      if (isDesktop) {
+        fontSize = '3.5rem'; // Desktop más grande
+      } else if (isMobile) {
+        fontSize = '2.2rem'; // Móvil más pequeño
+      }
+      
+      headerTitle.style.cssText = `
+        font-size: ${fontSize} !important;
+        font-weight: 700 !important;
+        line-height: 1.1 !important;
+      `;
+      
+      console.log(`✅ Título forzado a tamaño: ${fontSize}`);
+    }
+  }
+  
+  // Ejecutar inmediatamente y en resize
+  forceHeaderTitleSize();
+  window.addEventListener('resize', forceHeaderTitleSize);
+  
   setTimeout(() => {
+    const isMobile = window.innerWidth <= 749;
     const sidebarComponent = document.querySelector('collections-sidebar');
+    
     if (sidebarComponent) {
       console.log('✅ Componente Collections Sidebar encontrado en el DOM');
       
-      // Double-check que el botón sea visible
-      const toggleButton = sidebarComponent.querySelector('.collections-sidebar__toggle-button');
-      if (toggleButton) {
-        const styles = window.getComputedStyle(toggleButton);
-        console.log('👁️ Estilos del botón:', {
-          display: styles.display,
-          visibility: styles.visibility,
-          opacity: styles.opacity,
-          zIndex: styles.zIndex
-        });
-        
-        // Forzar visibilidad como respaldo ultra agresivo
-        toggleButton.style.cssText = `
-          display: block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          position: fixed !important;
-          left: 0 !important;
-          top: 50% !important;
-          transform: translateY(-50%) !important;
-          z-index: 9999 !important;
-          width: 4rem !important;
-          background: #E53E3E !important;
-          color: white !important;
-          border: none !important;
-          border-radius: 0 1.5rem 1.5rem 0 !important;
-          padding: 1rem 0.8rem !important;
-          cursor: pointer !important;
-        `;
-        console.log('✅ Botón forzado con estilos ultra agresivos');
+      if (!isMobile) {
+        // Solo verificar botón desktop en desktop
+        const toggleButton = sidebarComponent.querySelector('.collections-sidebar__toggle-button');
+        if (toggleButton) {
+          const styles = window.getComputedStyle(toggleButton);
+          console.log('👁️ Estilos del botón desktop:', {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity,
+            zIndex: styles.zIndex
+          });
+          
+          // Forzar visibilidad como respaldo para desktop
+          toggleButton.style.cssText = `
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: fixed !important;
+            left: 0 !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 9999 !important;
+            width: 4rem !important;
+            background: #E53E3E !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 0 1.5rem 1.5rem 0 !important;
+            padding: 1rem 0.8rem !important;
+            cursor: pointer !important;
+          `;
+          console.log('✅ Botón desktop forzado con estilos');
+        } else {
+          console.error('❌ Botón desktop de toggle no encontrado');
+        }
       } else {
-        console.error('❌ Botón de toggle no encontrado');
+        console.log('📱 Móvil detectado - botón desktop debe estar oculto');
+        
+        // En móvil, verificar que el botón móvil esté funcionando
+        const mobileButton = document.querySelector('#header-collections-mobile-toggle');
+        if (mobileButton) {
+          console.log('✅ Botón móvil encontrado y listo');
+        } else {
+          console.error('❌ Botón móvil no encontrado');
+        }
       }
     } else {
       console.error('❌ Componente Collections Sidebar no encontrado en el DOM');
-      
-      // Crear el botón como respaldo de emergencia
-      createFallbackButton();
     }
   }, 1000);
-});
-
-// Función de respaldo para crear el botón directamente
-function createFallbackButton() {
-  console.log('🆘 Creando botón de respaldo de emergencia...');
-  
-  const fallbackButton = document.createElement('div');
-  fallbackButton.innerHTML = `
-    <button style="
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      position: fixed !important;
-      left: 0 !important;
-      top: 50% !important;
-      transform: translateY(-50%) !important;
-      z-index: 9999 !important;
-      width: 4rem !important;
-      background: #E53E3E !important;
-      color: white !important;
-      border: none !important;
-      border-radius: 0 1.5rem 1.5rem 0 !important;
-      padding: 1rem 0.8rem !important;
-      cursor: pointer !important;
-      font-size: 12px !important;
-      text-align: center !important;
-    " onclick="alert('Collections Sidebar - Botón de respaldo funcionando!')">
-      📂<br>
-      C<br>a<br>t<br>e<br>g<br>o<br>r<br>í<br>a<br>s
-    </button>
-  `;
-  
-  document.body.appendChild(fallbackButton);
-  console.log('✅ Botón de respaldo creado y agregado al DOM');
-} 
+}); 

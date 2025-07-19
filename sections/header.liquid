@@ -533,12 +533,10 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
+
     -%}
 
-    <!-- Logo cuadrado en la esquina izquierda -->
+    <!-- Logo cuadrado en la esquina izquierda (desktop) -->
     <div class="header__heading-logo-wrapper">
       <a href="{{ routes.root_url }}">
         <img src="{{ 'atico.jpg' | asset_url }}" alt="Atico Logo" class="header-logo" width="80" height="80" loading="lazy">
@@ -547,13 +545,13 @@
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             <span class="h2 header-title">El Atico de Hisui</span>
           </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -622,6 +620,18 @@
         {%- endif -%}
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+      <!-- Botón de categorías para móvil (después de búsqueda) -->
+      <button 
+        class="header__collections-mobile-toggle header__icon"
+        id="header-collections-mobile-toggle"
+        aria-label="Abrir categorías"
+        type="button"
+      >
+        <span class="svg-wrapper">
+          {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        </span>
+      </button>
 
       {%- if shop.customer_accounts_enabled -%}
         <a

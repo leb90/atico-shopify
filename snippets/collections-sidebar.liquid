@@ -10,30 +10,26 @@
 <script src="{{ 'collections-sidebar.js' | asset_url }}" defer="defer"></script>
 
 <collections-sidebar class="collections-sidebar-wrapper">
-  <!-- Botón sticky para abrir la sidebar -->
-  <div class="collections-sidebar__toggle-button" id="collections-sidebar-toggle">
-    <button 
-      class="collections-sidebar__button button"
-      aria-label="Abrir categorías"
-      type="button"
-    >
-      <span class="svg-wrapper">
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
-      </span>
-      <span class="collections-sidebar__button-text">
-        <span>C</span>
-        <span>a</span>
-        <span>t</span>
-        <span>e</span>
-        <span>g</span>
-        <span>o</span>
-        <span>r</span>
-        <span>í</span>
-        <span>a</span>
-        <span>s</span>
-      </span>
-    </button>
-  </div>
+  <!-- Botón sticky para abrir la sidebar (solo desktop) -->
+  <button 
+    class="collections-sidebar__toggle-button"
+    id="collections-sidebar-toggle"
+    aria-label="Abrir categorías"
+    type="button"
+  >
+    <span class="collections-sidebar__button-text">
+      <span>C</span>
+      <span>A</span>
+      <span>T</span>
+      <span>E</span>
+      <span>G</span>
+      <span>O</span>
+      <span>R</span>
+      <span>Í</span>
+      <span>A</span>
+      <span>S</span>
+    </span>
+  </button>
 
   <!-- Sidebar con overlay -->
   <div class="collections-sidebar__container" id="collections-sidebar-container">

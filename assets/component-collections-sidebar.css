@@ -8,20 +8,14 @@
   visibility: visible;
 }
 
-/* Botón sticky toggle */
+/* Botón sticky toggle (solo desktop) */
 .collections-sidebar__toggle-button {
   position: fixed;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 101;
-  transition: transform 0.3s ease;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.collections-sidebar__button {
+  z-index: 50;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,27 +23,26 @@
   background-color: rgba(var(--color-button), var(--alpha-button-background));
   color: rgb(var(--color-button-text));
   border: none;
-  padding: 1rem 0.8rem;
+  padding: 1.2rem 0.8rem;
   border-radius: 0 1.5rem 1.5rem 0;
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
   min-width: auto;
   min-height: auto;
-  width: 4rem;
+  width: 4.5rem;
 }
 
-.collections-sidebar__button:hover {
+.collections-sidebar__toggle-button:hover {
   background-color: rgba(var(--color-button), 0.9);
-  transform: translateX(0.5rem);
+  transform: translateY(-50%) translateX(0.5rem);
   box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3);
 }
 
-.collections-sidebar__button .svg-wrapper {
-  width: 1.8rem;
-  height: 1.8rem;
+.collections-sidebar__toggle-button .svg-wrapper {
+  width: 2rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,15 +53,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.05rem;
   line-height: 1;
+  font-weight: 700;
 }
 
 .collections-sidebar__button-text span {
   display: block;
-  margin: 0.1rem 0;
-  font-weight: 600;
+  margin: 0.15rem 0;
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 /* Container de la sidebar */
@@ -78,7 +73,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 100;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s ease, opacity 0.3s ease;
@@ -207,19 +202,10 @@
   color: rgb(var(--color-foreground));
 }
 
-/* Responsive */
+/* Responsive para la sidebar */
 @media screen and (max-width: 749px) {
   .collections-sidebar__drawer {
     width: 28rem;
-  }
-  
-  .collections-sidebar__button-text {
-    font-size: 0.9rem;
-  }
-  
-  .collections-sidebar__button {
-    padding: 0.8rem 0.6rem;
-    width: 3.5rem;
   }
   
   .collections-sidebar__link {
@@ -239,19 +225,6 @@
   
   .collections-sidebar__heading {
     font-size: 1.8rem;
-  }
-  
-  .collections-sidebar__button {
-    width: 3rem;
-    padding: 0.7rem 0.5rem;
-  }
-  
-  .collections-sidebar__button-text {
-    font-size: 0.8rem;
-  }
-  
-  .collections-sidebar__button-text span {
-    margin: 0.05rem 0;
   }
 }
 
@@ -275,21 +248,216 @@
   }
 }
 
-/* Botón visible sin animación por defecto */
+/* Botón visible por defecto */
 .collections-sidebar__toggle-button {
   opacity: 1 !important;
   visibility: visible !important;
-  display: block !important;
+  display: flex !important;
   transform: translateY(-50%) !important;
-  /* Animación deshabilitada temporalmente */
-  /* animation: slideInFromLeft 0.5s ease-out 0.5s forwards; */
+  animation: slideInFromLeft 0.5s ease-out 0.5s forwards;
 }
 
 /* Hide cuando la sidebar está abierta */
 .collections-sidebar__container.is-open ~ .collections-sidebar__toggle-button {
   transform: translateY(-50%) translateX(-100%);
-  opacity: 0;
+  opacity: 0 !important;
   pointer-events: none;
+  z-index: 10;
+  visibility: hidden !important;
+  display: none !important;
+}
+
+/* Ocultar completamente en móvil - FORZADO */
+@media screen and (max-width: 749px) {
+  .collections-sidebar__toggle-button {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    transform: translateX(-9999px) !important;
+  }
+  
+  /* Asegurar que NUNCA aparezca */
+  collections-sidebar .collections-sidebar__toggle-button {
+    display: none !important;
+  }
+}
+
+/* Botón móvil en el header */
+.header__collections-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: background-color 0.2s ease;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.header__collections-mobile-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header__collections-mobile-toggle .svg-wrapper {
+  width: 20px;
+  height: 20px;
+  color: rgb(var(--color-button-text));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor izquierdo para móvil */
+.header__left-mobile {
+  display: none;
+}
+
+/* Forzar ocultamiento en desktop */
+@media screen and (min-width: 750px) {
+  .header__left-mobile {
+    display: none !important;
+  }
+  
+  .header__collections-mobile-toggle {
+    display: none !important;
+  }
+}
+
+/* En móvil - permitir reorganización por JavaScript */
+@media screen and (max-width: 749px) {
+  .header__left-mobile {
+    display: block !important;
+  }
+  
+  .header__collections-mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .header__heading-logo-wrapper {
+    display: none !important;
+  }
+  
+  .desktop-localization-wrapper {
+    display: none !important;
+  }
+  
+  /* Asegurar que el botón de búsqueda sea visible en móvil */
+  .header__search {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .header__search .header__icon--search {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* FORZAR tamaño de fuente del título del header con mayor especificidad */
+.header .header__heading .header__heading-link .h2.header-title,
+.header .header__heading-link .h2.header-title,
+.header__heading-link .h2.header-title,
+.h2.header-title {
+  font-size: 3rem !important; /* Mucho más grande */
+  font-weight: 700 !important; /* Negrita para más impacto */
+  line-height: 1.1 !important;
+}
+
+/* Tamaños específicos para diferentes pantallas */
+@media screen and (min-width: 990px) {
+  .header .header__heading .header__heading-link .h2.header-title,
+  .header .header__heading-link .h2.header-title,
+  .header__heading-link .h2.header-title,
+  .h2.header-title {
+    font-size: 3.5rem !important; /* Muy grande en desktop */
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .header .header__heading .header__heading-link .h2.header-title,
+  .header .header__heading-link .h2.header-title,
+  .header__heading-link .h2.header-title,
+  .h2.header-title {
+    font-size: 2.2rem !important; /* Grande pero ajustado para móvil */
+  }
+}
+
+/* Ajustes para móvil - INTERCAMBIO CORRECTO */
+@media screen and (max-width: 749px) {
+  /* Layout del header en móvil */
+  .header {
+    display: grid;
+    grid-template-areas: 'categories title search';
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  
+  /* Botón de categorías móvil a la IZQUIERDA */
+  .header__collections-mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    grid-area: categories;
+    position: static;
+    transform: none;
+  }
+  
+  /* Título centrado */
+  .header__heading {
+    grid-area: title;
+    text-align: center;
+    justify-self: center;
+  }
+  
+  /* Botón de búsqueda a la DERECHA */
+  .header__search {
+    grid-area: search;
+  }
+  
+  /* Resto de iconos (cuenta, carrito) siguen en icons */
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Ocultar logo en móvil */
+  .header__heading-logo-wrapper {
+    display: none !important;
+  }
+  
+  /* Asegurar que todos los iconos tengan el mismo tamaño */
+  .header__icon,
+  .header__icon--search {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  /* Botón de búsqueda igual a los demás */
+  .header__icon--search:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Scrollbar personalizado para la navegación */
@@ -351,14 +519,7 @@
 
 /* Regla de respaldo para asegurar que el botón sea visible */
 collections-sidebar .collections-sidebar__toggle-button {
-  display: block !important;
+  display: flex !important;
   visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Respaldo sin animación si hay problemas */
-.collections-sidebar__toggle-button.no-animation {
-  animation: none !important;
-  transform: translateY(-50%) !important;
   opacity: 1 !important;
 } 
