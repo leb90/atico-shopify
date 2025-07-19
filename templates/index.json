@@ -15,11 +15,11 @@
         "slide_Kq446b": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/1a53c2f3-a56c-44a7-ab56-05ba0ac07ddc.__CR0_0_970_600_PT0_SX970_V1.png",
+            "image": "shopify://shop_images/black-bolt-white-flare-etbs_87ebe075-a422-48a7-822a-f73531014a4a.avif",
             "image_overlay_opacity": 0,
-            "heading": "Destined Rivals",
+            "heading": "Black bolt and White flare",
             "heading_size": "h1",
-            "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta: <em>Escarlata y Púrpura-Juntos de Aventuras</em>!",
+            "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta",
             "button_label": "Ver la nueva expansión",
             "link": "https://tcg.pokemon.com/es-es/expansions/destined-rivals/",
             "button_style_secondary": false,
@@ -117,7 +117,7 @@
         "image_LyY4YW": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/918MEzNZnfL._SL1500.jpg"
+            "image": "shopify://shop_images/pokemon-horizons-anime-iono-gym-leader-electric.avif"
           }
         },
         "product_4QxpW8": {
@@ -130,7 +130,7 @@
         "collection_zjYafr": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage"
+            "collection": "pokemon"
           }
         }
       },
@@ -141,9 +141,9 @@
       ],
       "name": "t:sections.collage.presets.name",
       "settings": {
-        "heading": "Collage multimedia",
+        "heading": "Todo de Pokémon",
         "heading_size": "h1",
-        "desktop_layout": "left",
+        "desktop_layout": "right",
         "mobile_layout": "column",
         "card_styles": "product-card-wrapper",
         "color_scheme": "",
