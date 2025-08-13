@@ -18,13 +18,13 @@
             "image": "shopify://shop_images/black-bolt-white-flare-etbs_87ebe075-a422-48a7-822a-f73531014a4a.avif",
             "image_overlay_opacity": 0,
             "heading": "Black bolt and White flare",
-            "heading_size": "h1",
-            "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta",
+            "heading_size": "h2",
+            "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta!",
             "button_label": "Ver la nueva expansión",
             "link": "https://tcg.pokemon.com/es-es/expansions/destined-rivals/",
             "button_style_secondary": false,
             "show_text_box": true,
-            "box_align": "bottom-right",
+            "box_align": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": ""
@@ -123,7 +123,7 @@
         "product_4QxpW8": {
           "type": "product",
           "settings": {
-            "product": "pokemon-tcg-scarlet-and-violet-paradox-rift-elite-trainer-box-roaring-moon",
+            "product": "black-bolt-white-flare-elite-trainer-box-etb",
             "second_image": false
           }
         },

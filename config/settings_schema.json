@@ -150,13 +150,9 @@
     "name": "t:settings_schema.layout.name",
     "settings": [
       {
-        "type": "range",
+        "type": "text",
         "id": "page_width",
-        "min": 1000,
-        "max": 1600,
-        "step": 100,
-        "default": 1200,
-        "unit": "px",
+        "default": "1200",
         "label": "t:settings_schema.layout.settings.page_width.label"
       },
       {
@@ -1250,7 +1246,7 @@
         "step": 2,
         "unit": "px",
         "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 40
+        "default": 4
       },
       {
         "type": "color_scheme",

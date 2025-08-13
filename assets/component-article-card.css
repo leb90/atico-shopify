@@ -48,6 +48,9 @@
 
 .article-card .card__heading {
   margin-bottom: 0.6rem;
+  letter-spacing: 0.2px;
+  font-size: 1.8rem;
+  line-height: 1.2;
 }
 
 .blog-articles .article-card .card__information,

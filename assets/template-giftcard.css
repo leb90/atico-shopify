@@ -322,3 +322,82 @@ h2,
   background: var(--gradient-background);
   background-attachment: fixed;
 }
+
+.gift-card__text {
+  margin-bottom: 1.7rem;
+}
+
+.gift-card__product-code {
+  display: inline-block;
+  vertical-align: baseline;
+  background-color: transparent;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  color: rgb(var(--color-foreground));
+  color: rgba(var(--color-foreground), 0.75);
+  padding: 1rem 1.3rem;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  line-height: 1;
+  text-align: center;
+  width: 100%;
+  max-width: 44rem;
+}
+
+.gift-card__icon {
+  width: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.gift-card__amount {
+  position: relative;
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+  margin-bottom: 1rem;
+}
+
+.gift-card__amount strong {
+  text-shadow: none;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  line-height: 1;
+  text-align: center;
+  box-shadow: 0.1rem 0.1rem 0 0 rgba(var(--color-foreground), 0.2);
+}
+
+.gift-card__amount strong {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.gift-card__label {
+  display: block;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.75);
+  margin-bottom: 2rem;
+}
+
+.gift-card__number {
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  color: rgba(var(--color-foreground), 0.75);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+  border-radius: 0.4rem;
+  box-shadow: none;
+  line-height: 1;
+}

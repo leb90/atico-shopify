@@ -158,7 +158,6 @@ details[open].menu-opening > .menu-drawer__submenu {
   font-size: 1.4rem;
   width: 100%;
   background-color: transparent;
-  font-family: var(--font-body-family);
   font-style: var(--font-body-style);
   text-align: left;
 }
@@ -240,4 +239,15 @@ details[open].menu-opening > .menu-drawer__submenu {
     filter: none !important;
     transition: none !important;
   }
+}
+
+.menu-drawer__navigation .header__menu-item {
+  font-size: 1.3rem;
+  letter-spacing: 0.06rem;
+  line-height: calc(1 + 0.8 / var(--font-body-scale));
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  text-underline-offset: 0.3rem;
+  text-underline-color: rgba(var(--color-foreground), 0.4);
+  transition: text-decoration-thickness var(--duration-short) ease;
 }

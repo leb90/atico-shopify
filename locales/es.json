@@ -108,6 +108,74 @@
       "share": "Compartir este artículo",
       "success": "Tu comentario se publicó correctamente. ¡Gracias!",
       "success_moderated": "Tu comentario se publicó correctamente. Lo publicaremos en breve, cuando se modere nuestro blog."
+    },
+    "main-article": {
+      "name": "Blog post",
+      "blocks": {
+        "featured_image": {
+          "name": "Featured image",
+          "settings": {
+            "image_height": {
+              "label": "Image height",
+              "options__1": {
+                "label": "Adapt to image"
+              },
+              "options__2": {
+                "label": "Small"
+              },
+              "options__3": {
+                "label": "Medium"
+              },
+              "options__4": {
+                "label": "Large"
+              }
+            }
+          }
+        },
+        "title": {
+          "name": "Title",
+          "settings": {
+            "blog_show_date": {
+              "label": "Date"
+            },
+            "blog_show_author": {
+              "label": "Author"
+            }
+          }
+        },
+        "content": {
+          "name": "Content"
+        },
+        "inline_image": {
+          "name": "Inline Image",
+          "settings": {
+            "image": {
+              "label": "Image"
+            },
+            "image_position": {
+              "label": "Image Position",
+              "options__1": {
+                "label": "Left"
+              },
+              "options__2": {
+                "label": "Right"
+              }
+            },
+            "caption": {
+              "label": "Caption"
+            }
+          }
+        },
+        "share": {
+          "name": "Share",
+          "settings": {
+            "text": {
+              "label": "Text",
+              "default": "Share"
+            }
+          }
+        }
+      }
     }
   },
   "onboarding": {

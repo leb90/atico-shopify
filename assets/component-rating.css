@@ -7,6 +7,42 @@
   margin: 0;
 }
 
+.rating .icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+}
+
+.rating--small .icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.rating--medium .icon {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.rating--large .icon {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+.rating--large .icon--small {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.rating--large .icon--medium {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+.rating--large .icon--large {
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
 .product .rating-star {
   --letter-spacing: 0.8;
   --font-size: 1.7;
@@ -29,7 +65,6 @@
   font-size: calc(var(--font-size) * 1rem);
   line-height: 1;
   display: inline-block;
-  font-family: Times;
   margin: 0;
 }
 

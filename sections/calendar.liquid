@@ -1,0 +1,351 @@
+<link rel="stylesheet" href="{{ 'component-calendar.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<div class="calendar-section">
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <h2 class="calendar-title">{{ section.settings.title | default: 'Calendario de Actividades Semanales' }}</h2>
+      <p class="calendar-subtitle">{{ section.settings.subtitle | default: 'Organiza tu semana con nuestros torneos y eventos' }}</p>
+    </div>
+
+    <div class="calendar-grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'day' %}
+            <div class="calendar-day" {{ block.shopify_attributes }}>
+              <div class="day-header">
+                <span class="day-name">{{ block.settings.day_name }}</span>
+                <span class="day-time">{{ block.settings.time_range }}</span>
+              </div>
+              
+              <ul class="activities-list">
+                                                 {% if block.settings.activity_1_enabled %}
+                   <li class="activity-item">
+                     <div class="activity-time">{{ block.settings.activity_1_time }}</div>
+                     <div class="activity-content">
+                       <div class="activity-game">
+                         {% if block.settings.activity_1_image != blank %}
+                           <img src="{{ block.settings.activity_1_image | image_url: width: 64 }}" alt="{{ block.settings.activity_1_game }}" class="game-image">
+                         {% endif %}
+                         <span>{{ block.settings.activity_1_game }}</span>
+                       </div>
+                       <div class="activity-type">{{ block.settings.activity_1_type }}</div>
+                       {% if block.settings.activity_1_duration != blank %}
+                         <div class="activity-duration">{{ block.settings.activity_1_duration }}</div>
+                       {% endif %}
+                     </div>
+                   </li>
+                 {% endif %}
+
+                                 {% if block.settings.activity_2_enabled %}
+                   <li class="activity-item">
+                     <div class="activity-time">{{ block.settings.activity_2_time }}</div>
+                     <div class="activity-content">
+                                               <div class="activity-game">
+                          {% if block.settings.activity_2_image != blank %}
+                            <img src="{{ block.settings.activity_2_image | image_url: width: 64 }}" alt="{{ block.settings.activity_2_game }}" class="game-image">
+                          {% endif %}
+                          <span>{{ block.settings.activity_2_game }}</span>
+                        </div>
+                       <div class="activity-type">{{ block.settings.activity_2_type }}</div>
+                       {% if block.settings.activity_2_duration != blank %}
+                         <div class="activity-duration">{{ block.settings.activity_2_duration }}</div>
+                       {% endif %}
+                     </div>
+                   </li>
+                 {% endif %}
+
+                                 {% if block.settings.activity_3_enabled %}
+                   <li class="activity-item">
+                     <div class="activity-time">{{ block.settings.activity_3_time }}</div>
+                     <div class="activity-content">
+                                               <div class="activity-game">
+                          {% if block.settings.activity_3_image != blank %}
+                            <img src="{{ block.settings.activity_3_image | image_url: width: 64 }}" alt="{{ block.settings.activity_3_game }}" class="game-image">
+                          {% endif %}
+                          <span>{{ block.settings.activity_3_game }}</span>
+                        </div>
+                       <div class="activity-type">{{ block.settings.activity_3_type }}</div>
+                       {% if block.settings.activity_3_duration != blank %}
+                         <div class="activity-duration">{{ block.settings.activity_3_duration }}</div>
+                       {% endif %}
+                     </div>
+                   </li>
+                 {% endif %}
+
+                                 {% if block.settings.activity_4_enabled %}
+                   <li class="activity-item">
+                     <div class="activity-time">{{ block.settings.activity_4_time }}</div>
+                     <div class="activity-content">
+                                               <div class="activity-game">
+                          {% if block.settings.activity_4_image != blank %}
+                            <img src="{{ block.settings.activity_4_image | image_url: width: 64 }}" alt="{{ block.settings.activity_4_game }}" class="game-image">
+                          {% endif %}
+                          <span>{{ block.settings.activity_4_game }}</span>
+                        </div>
+                       <div class="activity-type">{{ block.settings.activity_4_type }}</div>
+                       {% if block.settings.activity_4_duration != blank %}
+                         <div class="activity-duration">{{ block.settings.activity_4_duration }}</div>
+                       {% endif %}
+                     </div>
+                   </li>
+                 {% endif %}
+
+                {% unless block.settings.activity_1_enabled or block.settings.activity_2_enabled or block.settings.activity_3_enabled or block.settings.activity_4_enabled %}
+                  <li class="no-activities">
+                    No hay actividades programadas para este día
+                  </li>
+                {% endunless %}
+              </ul>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <div class="calendar-footer">
+      <p class="footer-text">
+        {{ section.settings.footer_text | default: 'Todos los torneos son oficiales a menos que se indique lo contrario. ¡Ven y únete a la diversión!' }}
+        {% if section.settings.show_contact %}
+          <br><span class="footer-highlight">Para más información, contáctanos.</span>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Calendario de Actividades",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título del calendario",
+      "default": "Calendario de Actividades Semanales"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Organiza tu semana con nuestros torneos y eventos"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Texto del pie de página",
+      "default": "Todos los torneos son oficiales a menos que se indique lo contrario. ¡Ven y únete a la diversión!"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Mostrar información de contacto",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "day",
+      "name": "Día de la semana",
+      "settings": [
+        {
+          "type": "text",
+          "id": "day_name",
+          "label": "Nombre del día",
+          "default": "Martes"
+        },
+        {
+          "type": "text",
+          "id": "time_range",
+          "label": "Rango de horario",
+          "default": "16:00 - 21:00 hs"
+        },
+        {
+          "type": "header",
+          "content": "Actividad 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "activity_1_enabled",
+          "label": "Habilitar actividad 1",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "activity_1_time",
+          "label": "Hora",
+          "default": "16:00"
+        },
+        {
+          "type": "text",
+          "id": "activity_1_game",
+          "label": "Juego",
+          "default": "Magic: The Gathering"
+        },
+                 {
+           "type": "text",
+           "id": "activity_1_type",
+           "label": "Tipo de actividad",
+           "default": "Commander (Ligas Oficiales & Casual)"
+         },
+         {
+           "type": "text",
+           "id": "activity_1_duration",
+           "label": "Duración (ej: 16:00 - 21:00)",
+           "default": "16:00 - 21:00"
+         },
+         {
+           "type": "image_picker",
+           "id": "activity_1_image",
+           "label": "Imagen del juego (opcional)"
+         },
+        {
+          "type": "header",
+          "content": "Actividad 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "activity_2_enabled",
+          "label": "Habilitar actividad 2",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "activity_2_time",
+          "label": "Hora",
+          "default": "19:30"
+        },
+        {
+          "type": "text",
+          "id": "activity_2_game",
+          "label": "Juego",
+          "default": "Magic: The Gathering"
+        },
+                 {
+           "type": "text",
+           "id": "activity_2_type",
+           "label": "Tipo de actividad",
+           "default": "Modern (Torneo No-Oficial)"
+         },
+         {
+           "type": "text",
+           "id": "activity_2_duration",
+           "label": "Duración (ej: 19:30 - 22:00)",
+           "default": "19:30 - 22:00"
+         },
+         {
+           "type": "image_picker",
+           "id": "activity_2_image",
+           "label": "Imagen del juego (opcional)"
+         },
+        {
+          "type": "header",
+          "content": "Actividad 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "activity_3_enabled",
+          "label": "Habilitar actividad 3",
+          "default": false
+        },
+                 {
+           "type": "text",
+           "id": "activity_3_time",
+           "label": "Hora",
+           "default": "18:00"
+         },
+         {
+           "type": "text",
+           "id": "activity_3_game",
+           "label": "Juego",
+           "default": "Yu-Gi-Oh!"
+         },
+         {
+           "type": "text",
+           "id": "activity_3_type",
+           "label": "Tipo de actividad",
+           "default": "Torneo Oficial"
+         },
+         {
+           "type": "text",
+           "id": "activity_3_duration",
+           "label": "Duración (ej: 18:00 - 21:00)",
+           "default": "18:00 - 21:00"
+         },
+         {
+           "type": "image_picker",
+           "id": "activity_3_image",
+           "label": "Imagen del juego (opcional)"
+         },
+        {
+          "type": "header",
+          "content": "Actividad 4"
+        },
+        {
+          "type": "checkbox",
+          "id": "activity_4_enabled",
+          "label": "Habilitar actividad 4",
+          "default": false
+        },
+                 {
+           "type": "text",
+           "id": "activity_4_time",
+           "label": "Hora",
+           "default": "19:00"
+         },
+         {
+           "type": "text",
+           "id": "activity_4_game",
+           "label": "Juego",
+           "default": "One Piece"
+         },
+         {
+           "type": "text",
+           "id": "activity_4_type",
+           "label": "Tipo de actividad",
+           "default": "Torneo Oficial"
+         },
+         {
+           "type": "text",
+           "id": "activity_4_duration",
+           "label": "Duración (ej: 19:00 - 22:00)",
+           "default": "19:00 - 22:00"
+         },
+         {
+           "type": "image_picker",
+           "id": "activity_4_image",
+           "label": "Imagen del juego (opcional)"
+         }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calendario de Actividades",
+      "blocks": [
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        },
+        {
+          "type": "day"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
