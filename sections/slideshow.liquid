@@ -68,6 +68,19 @@
     font-size: 1.2rem;
   }
 
+  /* Fix para mobile cuando hay botones - posicionamiento correcto */
+  @media screen and (max-width: 749px) {
+    .slideshow__text-wrapper .slideshow__text.banner__box:has(.banner__buttons) {
+      position: absolute;
+      top: auto;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      padding: 1.5rem;
+    }
+  }
 </style>
 
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}

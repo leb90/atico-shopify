@@ -252,3 +252,32 @@ slideshow-component:not(.page-width) .slider-buttons {
   opacity: 0;
   transform: scale(0.8);
 }
+
+/* Fix específico para slideshow con botones en mobile */
+@media screen and (max-width: 749px) {
+  .slideshow__text-wrapper .slideshow__text.banner__box:has(.banner__buttons) {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 2rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90% !important;
+    max-width: 400px !important;
+    padding: 1.5rem !important;
+    z-index: 2 !important;
+  }
+  
+  .slideshow__text-wrapper .slideshow__text.banner__box:has(.banner__buttons) .banner__buttons {
+    margin-top: 1rem !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  .slideshow__text-wrapper .slideshow__text.banner__box:has(.banner__buttons) .banner__buttons .button {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}

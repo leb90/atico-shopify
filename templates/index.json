@@ -17,8 +17,8 @@
           "settings": {
             "image": "shopify://shop_images/black-bolt-white-flare-etbs_87ebe075-a422-48a7-822a-f73531014a4a.avif",
             "image_overlay_opacity": 0,
-            "heading": "Black bolt and White flare",
-            "heading_size": "h2",
+            "heading": "<strong>Black bolt and White flare</strong>",
+            "heading_size": "h1",
             "subheading": "¡No te pierdas la nueva expansión de DR Pokémon, ya a la venta!",
             "button_label": "Ver la nueva expansión",
             "link": "https://tcg.pokemon.com/es-es/expansions/destined-rivals/",
@@ -35,7 +35,7 @@
           "settings": {
             "image": "shopify://shop_images/WhatsApp_Image_2025-03-28_at_16.47.13_1.jpg",
             "image_overlay_opacity": 0,
-            "heading": "Leagues Cup",
+            "heading": "<strong>Leagues Cup</strong>",
             "heading_size": "h1",
             "subheading": "Experience the thrill of competitive Pokémon TCG at El Ático de Hisui. Earn points, climb the rankings.",
             "button_label": "",
@@ -83,31 +83,242 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "calendar_JMrtzW": {
+      "type": "calendar",
+      "blocks": {
+        "day_h3mi7e": {
+          "type": "day",
+          "settings": {
+            "day_name": "Martes",
+            "time_range": "14:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "18:30",
+            "activity_1_game": "Academia Pokémon",
+            "activity_1_type": "Enseñanza de TCG Pokémon adultos",
+            "activity_1_duration": "18:30 - 20:30",
+            "activity_2_enabled": true,
+            "activity_2_time": "20:00",
+            "activity_2_game": "Martes de Mitos y Leyendas",
+            "activity_2_type": "Jornada de testeo y enseñanzas sobre mitos y leyendas",
+            "activity_2_duration": "20:00 - 22:00",
+            "activity_3_enabled": false,
+            "activity_3_time": "18:00",
+            "activity_3_game": "Yu-Gi-Oh!",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "18:00 - 21:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        },
+        "day_76VJbK": {
+          "type": "day",
+          "settings": {
+            "day_name": "Miercoles",
+            "time_range": "14:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "18:30",
+            "activity_1_game": "Escuelita Pokémon",
+            "activity_1_type": "Enseñanza de TCG Pokémon Niños (8/11 años)",
+            "activity_1_duration": "18:30 - 20:30",
+            "activity_2_enabled": false,
+            "activity_2_time": "19:30",
+            "activity_2_game": "Magic: The Gathering",
+            "activity_2_type": "Modern (Torneo No-Oficial)",
+            "activity_2_duration": "19:30 - 22:00",
+            "activity_3_enabled": false,
+            "activity_3_time": "18:00",
+            "activity_3_game": "Yu-Gi-Oh!",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "18:00 - 21:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        },
+        "day_eCtAzV": {
+          "type": "day",
+          "settings": {
+            "day_name": "Jueves",
+            "time_range": "14:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "15:30",
+            "activity_1_game": "Trade Day",
+            "activity_1_type": "Dia casual de intercambio de cartas de todo tipo",
+            "activity_1_duration": "15:30 - 17:30",
+            "activity_2_enabled": false,
+            "activity_2_time": "19:30",
+            "activity_2_game": "Magic: The Gathering",
+            "activity_2_type": "Modern (Torneo No-Oficial)",
+            "activity_2_duration": "19:30 - 22:00",
+            "activity_3_enabled": false,
+            "activity_3_time": "18:00",
+            "activity_3_game": "Yu-Gi-Oh!",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "18:00 - 21:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        },
+        "day_kkRhfr": {
+          "type": "day",
+          "settings": {
+            "day_name": "Viernes",
+            "time_range": "14:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "18:00",
+            "activity_1_game": "Torneos Pokémon Tanocup",
+            "activity_1_type": "Liga Pokemon de TCG",
+            "activity_1_duration": "18:00 - 23:00",
+            "activity_2_enabled": false,
+            "activity_2_time": "19:30",
+            "activity_2_game": "Magic: The Gathering",
+            "activity_2_type": "Modern (Torneo No-Oficial)",
+            "activity_2_duration": "19:30 - 22:00",
+            "activity_3_enabled": false,
+            "activity_3_time": "18:00",
+            "activity_3_game": "Yu-Gi-Oh!",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "18:00 - 21:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        },
+        "day_iEzWgY": {
+          "type": "day",
+          "settings": {
+            "day_name": "Sabado",
+            "time_range": "14:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "17:00",
+            "activity_1_game": "Digimon Torneos",
+            "activity_1_type": "DigiTorneo",
+            "activity_1_duration": "17:00 - 20:00",
+            "activity_2_enabled": true,
+            "activity_2_time": "18:00",
+            "activity_2_game": "Liga Lairén",
+            "activity_2_type": "Modern (Torneo)",
+            "activity_2_duration": "18:00 - 21:00",
+            "activity_3_enabled": true,
+            "activity_3_time": "16:00",
+            "activity_3_game": "Star Wars",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "16:00 - 19:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        },
+        "day_yJXmj4": {
+          "type": "day",
+          "settings": {
+            "day_name": "Domingo",
+            "time_range": "16:00 - 21:00 hs",
+            "activity_1_enabled": true,
+            "activity_1_time": "18:00",
+            "activity_1_game": "Escuela Pokemon",
+            "activity_1_type": "Enseñanza Pokemon TCG (12/16 años)",
+            "activity_1_duration": "18:00 - 20:00",
+            "activity_2_enabled": false,
+            "activity_2_time": "19:30",
+            "activity_2_game": "Magic: The Gathering",
+            "activity_2_type": "Modern (Torneo No-Oficial)",
+            "activity_2_duration": "19:30 - 22:00",
+            "activity_3_enabled": false,
+            "activity_3_time": "18:00",
+            "activity_3_game": "Yu-Gi-Oh!",
+            "activity_3_type": "Torneo Oficial",
+            "activity_3_duration": "18:00 - 21:00",
+            "activity_4_enabled": false,
+            "activity_4_time": "19:00",
+            "activity_4_game": "One Piece",
+            "activity_4_type": "Torneo Oficial",
+            "activity_4_duration": "19:00 - 22:00"
+          }
+        }
+      },
+      "block_order": [
+        "day_h3mi7e",
+        "day_76VJbK",
+        "day_eCtAzV",
+        "day_kkRhfr",
+        "day_iEzWgY",
+        "day_yJXmj4"
+      ],
+      "name": "Calendario de Actividades",
       "settings": {
-        "collection": "all",
-        "products_to_show": 24,
-        "title": "",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
+        "title": "Calendario de Actividades Semanales",
+        "subtitle": "Organiza tu semana con nuestros torneos y eventos",
+        "footer_text": "Todos los torneos son oficiales a menos que se indique lo contrario. ¡Ven y únete a la diversión!",
+        "show_contact": true
+      }
+    },
+    "image_with_text_C4CwVj": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_cwiaqL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bienvenidos a El Ático de Hisu",
+            "heading_size": "h2"
+          }
+        },
+        "text_GntpFt": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Un punto de encuentro para todos los que amamos el Coleccionismo y los juegos de cartas</strong>, donde cada mazo tiene su estrategia, cada figura un recuerdos y cada partida se vive con la misma emoción que la primera vez. En El Ático de Hisui, el hobby se transforma en comunidad: un espacio donde compartir, aprender y competir rodeado de gente que esta en la misma que vos.</p><p>Contamos con una amplia variedad de TCG —Pokémon, Magic, Yu-Gi-Oh! y más— además de figuras, accesorios y artículos vintage de colección para todos los gustos.</p><p> Claramente los mejores precios los vas a encontrar presencialmente, Promociones o artículos en descuento y de mas. Por eso nunca te pierdas la oportunidad de pasar por el local !</p><p> Organizamos torneos semanales y mensuales para todos los niveles, desde quienes recién empiezan hasta jugadores experimentados que buscan nuevos retos.</p>",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cwiaqL",
+        "text_GntpFt"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Imagen_de_WhatsApp_2025-08-09_a_las_16.05.23_2aa578a3.jpg",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    },
+    "featured_blog_7G63MF": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "news",
+        "post_limit": 3,
+        "heading": "El Atico Comunidad",
+        "heading_size": "h1",
+        "columns_desktop": 2,
         "show_view_all": true,
-        "view_all_style": "outline",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 0,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     },
@@ -154,7 +365,9 @@
   },
   "order": [
     "slideshow_VH4ahn",
-    "featured_collection",
+    "calendar_JMrtzW",
+    "image_with_text_C4CwVj",
+    "featured_blog_7G63MF",
     "collage_hJqrm6"
   ]
 }
